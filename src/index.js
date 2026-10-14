@@ -1,4 +1,3 @@
-
 const links = [
   {
     icon: "globe",
@@ -86,18 +85,12 @@ const escapeHTML = (value) =>
   })[char]);
 
 function iconSVG(name) {
-  const paths = icons[name] || icons.globe;
-
   return `
-    <svg viewBox="0 0 24 24"
-      width="23" height="23"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.65"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+    <svg viewBox="0 0 24 24" width="23" height="23"
+      fill="none" stroke="currentColor" stroke-width="1.65"
+      stroke-linecap="round" stroke-linejoin="round"
       aria-hidden="true">
-      ${paths}
+      ${icons[name] || icons.globe}
     </svg>
   `;
 }
@@ -106,10 +99,10 @@ export default {
   async fetch() {
     const cards = links.map((link, index) => `
       <a class="link-card"
-         href="${escapeHTML(link.url)}"
-         target="_blank"
-         rel="noopener noreferrer"
-         style="--i:${index}">
+        href="${escapeHTML(link.url)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="--i:${index}">
         <span class="link-icon">${iconSVG(link.icon)}</span>
         <span class="link-copy">
           <strong>${escapeHTML(link.title)}</strong>
@@ -130,9 +123,8 @@ export default {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f4ee">
-  <meta name="description"
-    content="Temukan semua tautan resmi Pajara Studio dalam satu tempat.">
+  <meta name="theme-color" content="#f4f0e7">
+  <meta name="description" content="Temukan semua tautan resmi Pajara Studio dalam satu tempat.">
   <title>Pajara Links — Pajara Studio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,63 +136,106 @@ export default {
       --green: #2f6b45;
       --dark: #214d32;
       --brown: #8a6a4a;
-      --cream: #f7f4ee;
-      --white: #fff;
-      --line: #e6e1d8;
+      --cream: #f4f0e7;
+      --line: #e3ddcf;
       --muted: #77776f;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse at 50% -10%, #e2eadf 0%, transparent 52%),
-        var(--cream);
       color: var(--dark);
       font-family: "DM Sans", sans-serif;
       -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(ellipse at 5% 8%, #dbe8d8 0, transparent 32%),
+        radial-gradient(ellipse at 100% 48%, #eadfce 0, transparent 35%),
+        radial-gradient(ellipse at 45% 100%, #e0e9dc 0, transparent 38%),
+        var(--cream);
+      background-attachment: fixed;
     }
 
-    a {
-      -webkit-tap-highlight-color: transparent;
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image: radial-gradient(#214d320d .7px, transparent .7px);
+      background-size: 8px 8px;
+      content: "";
     }
+
+    a { -webkit-tap-highlight-color: transparent; }
 
     .page {
       width: min(100% - 36px, 470px);
       margin: 0 auto;
-      padding: 54px 0 28px;
+      padding: 46px 0 30px;
     }
 
     .profile {
-      text-align: center;
+      position: relative;
       margin-bottom: 34px;
+      padding: 30px 20px 27px;
+      overflow: hidden;
+      border: 1px solid #ffffffb5;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #ffffffb8, #f9f6ef8c);
+      box-shadow: 0 18px 55px #214d320a;
+      text-align: center;
       animation: appear .6s ease both;
     }
 
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 20px;
-      border: 1px solid #ffffff80;
-      border-radius: 23px;
-      background: linear-gradient(145deg, #39794f, #214d32);
-      color: white;
-      box-shadow: 0 10px 30px #214d321c;
+    .profile::before,
+    .profile::after {
+      position: absolute;
+      width: 125px;
+      height: 125px;
+      border: 1px solid #2f6b4512;
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
     }
 
-    .brand-mark svg {
-      width: 30px;
-      height: 30px;
+    .profile::before {
+      top: -74px;
+      left: -55px;
+      box-shadow: 0 0 0 15px #2f6b4505, 0 0 0 30px #2f6b4504;
+    }
+
+    .profile::after {
+      right: -68px;
+      bottom: -90px;
+      box-shadow: 0 0 0 15px #2f6b4505, 0 0 0 30px #2f6b4504;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: grid;
+      width: 88px;
+      height: 88px;
+      place-items: center;
+      margin: 0 auto 19px;
+      padding: 7px;
+      overflow: hidden;
+      border: 1px solid #ffffff;
+      border-radius: 25px;
+      background: #fff;
+      box-shadow: 0 10px 28px #214d3218;
+    }
+
+    .brand-mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 17px;
     }
 
     .eyebrow {
-      margin: 0 0 8px;
+      margin: 0 0 9px;
       color: var(--brown);
       font-size: 9px;
       font-weight: 700;
@@ -218,10 +253,10 @@ export default {
     }
 
     .tagline {
-      margin: 12px 0 15px;
-      color: var(--brown);
+      margin: 12px 0 17px;
+      color: var(--green);
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 2px;
     }
 
@@ -229,15 +264,15 @@ export default {
       max-width: 310px;
       margin: 0 auto;
       color: #707168;
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 12px;
+      line-height: 1.9;
     }
 
     .section-heading {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 0 2px 14px;
+      margin: 0 3px 15px;
     }
 
     .section-heading span {
@@ -251,44 +286,54 @@ export default {
     .section-heading::after {
       height: 1px;
       flex: 1;
-      background: var(--line);
+      background: #d8d1c3;
       content: "";
     }
 
-    .links {
-      display: grid;
-      gap: 11px;
-    }
+    .links { display: grid; gap: 11px; }
 
     .link-card {
       position: relative;
       display: flex;
-      min-height: 79px;
+      min-height: 80px;
       align-items: center;
       gap: 14px;
       padding: 14px;
       overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      background: #ffffffc9;
+      border: 1px solid #ffffffd9;
+      border-radius: 19px;
+      background: linear-gradient(115deg, #ffffffdf, #ffffffa8);
       color: inherit;
       text-decoration: none;
-      box-shadow: 0 3px 12px #302d2204;
+      box-shadow: 0 5px 18px #214d3207;
+      backdrop-filter: blur(8px);
       animation: appear .45s ease both;
       animation-delay: calc(var(--i) * 45ms);
-      transition:
-        transform .2s ease,
-        border-color .2s ease,
-        background .2s ease,
-        box-shadow .2s ease;
+      transition: transform .2s ease, border-color .2s ease,
+        background .2s ease, box-shadow .2s ease;
+    }
+
+    .link-card::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      background: var(--green);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform .2s ease;
+      content: "";
     }
 
     .link-card:hover {
       transform: translateY(-2px);
-      border-color: #b6c8b6;
-      background: var(--white);
-      box-shadow: 0 9px 24px #214d320b;
+      border-color: #b7cbb6;
+      background: #fff;
+      box-shadow: 0 12px 28px #214d3210;
     }
+
+    .link-card:hover::before { transform: scaleY(1); }
 
     .link-card:focus-visible {
       outline: 2px solid var(--green);
@@ -301,9 +346,9 @@ export default {
       height: 46px;
       flex: 0 0 46px;
       place-items: center;
-      border: 1px solid #eae6dc;
-      border-radius: 14px;
-      background: var(--cream);
+      border: 1px solid #e8e4d9;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #f8f5ee, #e9eee4);
       color: var(--green);
       transition: background .2s ease, color .2s ease;
     }
@@ -314,10 +359,7 @@ export default {
       color: white;
     }
 
-    .link-copy {
-      min-width: 0;
-      flex: 1;
-    }
+    .link-copy { min-width: 0; flex: 1; }
 
     .link-copy strong {
       display: block;
@@ -337,17 +379,19 @@ export default {
 
     .arrow {
       display: grid;
-      flex: 0 0 26px;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
       place-items: center;
+      border: 1px solid #eae5da;
       border-radius: 50%;
       color: #9b8a72;
-      transition: transform .2s ease, color .2s ease;
+      transition: transform .2s ease, color .2s ease, border-color .2s ease;
     }
 
     .link-card:hover .arrow {
       transform: translate(2px, -2px);
+      border-color: #cbd9c9;
       color: var(--green);
     }
 
@@ -358,9 +402,10 @@ export default {
 
     .footer-line {
       width: 34px;
-      height: 1px;
+      height: 2px;
       margin: 0 auto 17px;
-      background: #bca88f;
+      border-radius: 3px;
+      background: var(--brown);
     }
 
     .footer-brand {
@@ -377,40 +422,28 @@ export default {
       font-size: 10px;
     }
 
+    .footer-copy {
+      margin: 18px 0 0;
+      color: #a19a8e;
+      font-size: 9px;
+    }
+
     @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(9px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 380px) {
-      .page {
-        padding-top: 38px;
-      }
-
-      .link-card {
-        gap: 11px;
-        padding: 12px;
-      }
-
-      .link-copy strong {
-        font-size: 12px;
-      }
-
-      .link-copy small {
-        font-size: 10px;
-      }
+      .page { padding-top: 25px; }
+      .profile { padding: 25px 15px; border-radius: 25px; }
+      .link-card { gap: 11px; padding: 12px; }
+      .link-copy strong { font-size: 12px; }
+      .link-copy small { font-size: 10px; }
+      .brand-mark { width: 78px; height: 78px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         animation: none !important;
         transition: none !important;
       }
@@ -421,15 +454,14 @@ export default {
 <body>
   <main class="page">
     <header class="profile">
-      <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.5"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 21V11"/>
-          <path d="M12 15c-5 0-8-3-8-8 5 0 8 3 8 8Z"/>
-          <path d="M12 12c0-4 3-7 8-7 0 5-3 8-8 8"/>
-          <path d="M7 21h10"/>
-        </svg>
+      <div class="brand-mark">
+        <img
+          src="https://raw.githubusercontent.com/pajarastudio/pajara-links/main/icon-192.png"
+          alt="Logo Pajara Studio"
+          width="192"
+          height="192"
+          fetchpriority="high"
+        >
       </div>
 
       <p class="eyebrow">Creative Studio · Indonesia</p>
@@ -452,6 +484,7 @@ export default {
       <div class="footer-line"></div>
       <p class="footer-brand">PAJARA STUDIO</p>
       <p class="footer-tagline">Desain yang punya arah.</p>
+      <p class="footer-copy">© 2026 Pajara Studio. All rights reserved.</p>
     </footer>
   </main>
 </body>
